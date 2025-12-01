@@ -27,50 +27,45 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* 統一字體階層 */
-        /* 基礎內文 (手機/電腦通通統一，若需微調可加 media query) */
+        /* 統一字體階層 (21px, 26px, 34px, 42px) */
+        
+        /* 基礎內文 - 統一為 21px */
         body, p, li, span, div, a, input, select, textarea {
             font-size: 21px; 
             line-height: 1.6;
         }
 
-        /* 按鈕文字 */
-        .btn-text, button, .button {
-            font-size: 26px !important;
+        /* 導航欄 & 按鈕 - 改為 21px */
+        .nav-text, .btn-text, button, .button {
+            font-size: 21px !important;
+            line-height: 1.4;
         }
 
-        /* 小標題 / 重點數據 */
+        /* 小標題 / 重點數據 - 26px */
         h4, .text-xl, .font-bold.text-xl {
             font-size: 26px !important; 
             line-height: 1.4;
         }
 
-        /* 中標題 (Hero 小標, 卡片標題) */
+        /* 中標題 - 34px */
         h3, .text-2xl {
             font-size: 34px !important;
             line-height: 1.4;
         }
 
-        /* 大標題 (Section Title) */
+        /* 大標題 - 42px */
         h2, .text-4xl, .text-5xl {
-            font-size: 55px !important;
+            font-size: 42px !important;
             line-height: 1.2;
         }
 
-        /* 特大標題 (Hero Main Title) */
-        h1, .hero-title {
-            font-size: 68px !important;
-            line-height: 1.1;
-        }
-
-        /* 手機版適配：避免特大字體撐爆螢幕，設定最小安全值 */
+        /* 手機版適配 */
         @media (max-width: 768px) {
-            h1, .hero-title { font-size: 42px !important; }
-            h2, .text-4xl, .text-5xl { font-size: 34px !important; }
-            h3, .text-2xl { font-size: 26px !important; }
-            /* 內文維持 21px 或稍微縮小以利閱讀，這裡依您要求統一用較大字體，若太擠可改回 18px */
-            body, p, li, span, div { font-size: 18px !important; } 
-            .btn-text { font-size: 21px !important; }
+            /* 在手機上適度縮小以防破版，但維持相對比例 */
+            body, p, li, span, div { font-size: 19px !important; } 
+            .nav-text, .btn-text { font-size: 19px !important; }
+            h2 { font-size: 34px !important; }
+            h3 { font-size: 28px !important; }
         }
         
         /* 漸變文字效果 */
@@ -123,31 +118,42 @@
             0%    {opacity: 0; transform: translateY(-10px)}
             100%  {opacity: 1; transform: translateY(0)}
         }
+
+        /* 導航欄縮小動畫 */
+        #navbar {
+            transition: all 0.3s ease-in-out;
+        }
+        #navbar.shrink {
+            height: 64px !important;
+        }
+        #navbar.shrink .logo-container {
+            transform: scale(0.9);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
 
     <!-- 導航欄 -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300 supports-backdrop-blur:bg-white/60" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8"> 
-            <div class="flex justify-between items-center h-20">
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300 supports-backdrop-blur:bg-white/60 h-20 flex items-center" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full"> 
+            <div class="flex justify-between items-center w-full">
                 <!-- Logo 區域 -->
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer logo-container transition-transform duration-300" onclick="window.scrollTo(0,0)">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">
                         H
                     </div>
-                    <span class="font-bold text-lg md:text-xl tracking-tight text-slate-900" style="font-size: 26px !important;">香港僱傭服務協會</span>
+                    <span class="font-bold text-slate-900 nav-text" style="font-size: 26px !important;">香港僱傭服務協會</span>
                 </div>
                 
                 <!-- 電腦版菜單 -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-6">
-                        <a href="#home" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition" style="font-size: 21px;">首頁</a>
-                        <a href="#industry" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition" style="font-size: 21px;">行業優勢</a>
-                        <a href="#testimonials" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition" style="font-size: 21px;">學生見證</a>
-                        <a href="#services" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition" style="font-size: 21px;">課程內容</a>
-                        <a href="#seminar" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition" style="font-size: 21px;">免費分享會</a>
-                        <a href="#faq" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition" style="font-size: 21px;">常見問題</a>
+                        <a href="#home" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition nav-text">首頁</a>
+                        <a href="#industry" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition nav-text">行業優勢</a>
+                        <a href="#testimonials" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition nav-text">學生見證</a>
+                        <a href="#services" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition nav-text">課程內容</a>
+                        <a href="#seminar" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition nav-text">免費分享會</a>
+                        <a href="#faq" class="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md font-medium transition nav-text">常見問題</a>
                         <a href="#contact" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-full font-medium shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5 btn-text">
                             <i class="fab fa-whatsapp mr-1"></i> 立即諮詢
                         </a>
@@ -163,14 +169,14 @@
             </div>
         </div>
         <!-- 手機版展開菜單 -->
-        <div class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-40" id="mobile-menu">
+        <div class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-40 top-full" id="mobile-menu">
             <div class="px-6 pt-2 pb-6 space-y-2">
-                <a href="#home" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600" style="font-size: 21px;">首頁</a>
-                <a href="#industry" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600" style="font-size: 21px;">行業優勢</a>
-                <a href="#testimonials" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600" style="font-size: 21px;">學生見證</a>
-                <a href="#services" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600" style="font-size: 21px;">課程內容</a>
-                <a href="#faq" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600" style="font-size: 21px;">常見問題</a>
-                <a href="#contact" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-blue-600 font-bold bg-blue-50 mt-4" style="font-size: 21px;">
+                <a href="#home" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 nav-text">首頁</a>
+                <a href="#industry" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 nav-text">行業優勢</a>
+                <a href="#testimonials" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 nav-text">學生見證</a>
+                <a href="#services" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 nav-text">課程內容</a>
+                <a href="#faq" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 nav-text">常見問題</a>
+                <a href="#contact" onclick="toggleMenu()" class="block px-3 py-3 rounded-md font-medium text-blue-600 font-bold bg-blue-50 mt-4 nav-text">
                     <i class="fab fa-whatsapp mr-2"></i>立即諮詢
                 </a>
             </div>
@@ -184,19 +190,16 @@
         
         <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center z-10">
             <div class="animate-fade-in-up">
-                <!-- font-size: 34px -->
                 <h2 class="font-bold text-blue-300 mb-6 md:mb-8 highlight-text leading-normal" style="font-size: 34px !important;">
                     🏃💨 你已經厭倦，每日朝9晚6返工？
                 </h2>
                 
-                <!-- font-size: 55px (原本是 68px，您要求這裡改為 55px) -->
-                <!-- 如果您指的是副標題，我會修改這裡。如果這句是主標題，則按照要求改為 55px -->
-                <h1 class="font-extrabold text-white tracking-tight mb-8 leading-tight" style="font-size: 55px !important;">
-                    唔想打工，但又唔識創業？<br>
-                    <span class="gradient-text bg-gradient-to-r from-blue-400 to-indigo-400 block mt-2 md:inline md:mt-0">一個課程，一次創業，改變一生</span>
+                <h1 class="font-extrabold text-white tracking-tight mb-8 leading-tight">
+                    <span style="font-size: 42px !important; display: block; margin-bottom: 10px;">唔想打工，但又唔識創業？</span>
+                    <span class="gradient-text bg-gradient-to-r from-blue-400 to-indigo-400 block" style="font-size: 55px !important;">一個課程，一次創業，改變一生</span>
                 </h1>
                 
-                <p class="mt-4 max-w-2xl mx-auto text-gray-300 mb-8 md:mb-10 px-2" style="font-size: 21px;">
+                <p class="mt-4 max-w-2xl mx-auto text-gray-300 mb-8 md:mb-10 px-2">
                     本協會專注「教你創業」。僱傭公司是少數不受經濟環境影響的行業，讓我們帶你避開雷區，掌握行業秘密。
                 </p>
                 
@@ -217,34 +220,34 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col gap-12 items-center">
                 <div class="w-full max-w-4xl text-center">
-                    <h2 class="text-blue-600 font-semibold tracking-wide mb-2 text-center" style="font-size: 26px !important;">Why Choose Employment Company?</h2>
+                    <h2 class="text-blue-600 font-semibold tracking-wide mb-2 text-center nav-text">Why Choose Employment Company?</h2>
                     <h2 class="text-gray-900 mb-6 text-center" style="font-size: 55px !important;">🧕🏻 為什麼選擇僱傭行業？</h2>
                     
-                    <div class="text-gray-600 mb-6 leading-relaxed text-left md:text-center" style="font-size: 21px;">
+                    <div class="text-gray-600 mb-6 leading-relaxed text-left md:text-center">
                         <p>少數生意不受經濟環境影響的行業，無論面對以下任何挑戰，僱傭行業依然屹立不倒：</p>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                         <div class="flex items-center bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition">
-                            <i class="fas fa-chart-line text-red-500 mr-3 w-6 text-center" style="font-size: 26px;"></i>
-                            <span class="text-gray-700" style="font-size: 21px;">經濟衰退 📉</span>
+                            <i class="fas fa-chart-line text-red-500 mr-3 w-6 text-center btn-text"></i>
+                            <span class="text-gray-700">經濟衰退 📉</span>
                         </div>
                         <div class="flex items-center bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition">
-                            <i class="fas fa-virus text-green-500 mr-3 w-6 text-center" style="font-size: 26px;"></i>
-                            <span class="text-gray-700" style="font-size: 21px;">Covid-19流行病 😷</span>
+                            <i class="fas fa-virus text-green-500 mr-3 w-6 text-center btn-text"></i>
+                            <span class="text-gray-700">Covid-19流行病 😷</span>
                         </div>
                         <div class="flex items-center bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition">
-                            <i class="fas fa-shopping-bag text-orange-500 mr-3 w-6 text-center" style="font-size: 26px;"></i>
-                            <span class="text-gray-700" style="font-size: 21px;">北上消費 🇨🇳</span>
+                            <i class="fas fa-shopping-bag text-orange-500 mr-3 w-6 text-center btn-text"></i>
+                            <span class="text-gray-700">北上消費 🇨🇳</span>
                         </div>
                         <div class="flex items-center bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition">
-                            <i class="fas fa-plane-departure text-blue-500 mr-3 w-6 text-center" style="font-size: 26px;"></i>
-                            <span class="text-gray-700" style="font-size: 21px;">移民潮 🇬🇧</span>
+                            <i class="fas fa-plane-departure text-blue-500 mr-3 w-6 text-center btn-text"></i>
+                            <span class="text-gray-700">移民潮 🇬🇧</span>
                         </div>
                         <div class="flex items-center bg-gray-50 p-3 rounded-lg sm:col-span-2">
-                            <!-- 修改：顏色改為藍色 (text-blue-500) -->
-                            <i class="fas fa-robot text-blue-500 mr-3 w-6 text-center" style="font-size: 26px;"></i>
-                            <span class="text-gray-700 font-bold" style="font-size: 21px;">AI 人工智能 🤖</span>
+                            <i class="fas fa-robot text-orange-500 mr-3 w-6 text-center btn-text"></i>
+                            <!-- 修改：AI 人工智能 不要粗體 -->
+                            <span class="text-gray-700 font-normal">AI 人工智能 🤖</span>
                         </div>
                     </div>
                 </div>
@@ -254,7 +257,7 @@
                     <h3 class="font-bold text-orange-800 mb-3 flex items-center" style="font-size: 34px !important;">
                         <i class="fas fa-shield-alt mr-2"></i> 經濟逆境下的避風港
                     </h3>
-                    <p class="text-gray-700 leading-relaxed" style="font-size: 21px;">
+                    <p class="text-gray-700 leading-relaxed">
                         餐廳遇上疫情會倒閉，按摩美容遇上北上消費也會倒閉，但僱傭服務是不受影響。因為在3年疫情裏僱主也要繼續請外傭、內地阿姨人工高過外傭工資，所以在當前經濟環境之下，僱傭業是非常有吸引力。
                     </p>
                 </div>
@@ -265,7 +268,7 @@
                         <div class="absolute -top-4 -right-4 w-20 h-20 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
                         
                         <h3 class="font-bold text-gray-900 mb-4" style="font-size: 34px !important;">☕️ 剛性需求</h3>
-                        <p class="text-gray-700 leading-relaxed mb-6" style="font-size: 21px;">
+                        <p class="text-gray-700 leading-relaxed mb-6">
                             對於「用慣外傭」的人來講，請外傭是必需品。<br><br>
                             「假期可以唔請，工人<span class="text-red-600 font-bold">唔可以</span>唔請」
                         </p>
@@ -279,7 +282,6 @@
                 <div class="w-full max-w-4xl mt-4">
                     <h3 class="font-bold text-gray-800 mb-6 text-center" style="font-size: 34px !important;">📈 外傭人口持續增長</h3>
                     <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative">
-                        <!-- 入境處資料 標籤 (font-size: 26px) -->
                         <div class="absolute top-2 left-2 bg-gray-100 text-gray-500 px-2 py-1 rounded border border-gray-300" style="font-size: 26px;">
                             入境處資料
                         </div>
@@ -303,27 +305,127 @@
                             <text x="200" y="70" text-anchor="middle" fill="#1e293b" font-weight="bold" font-size="12">40萬 (真實)</text>
 
                             <circle cx="350" cy="40" r="5" fill="#4f46e5" />
-                            <!-- 修改：60萬 font-size -->
+                            <!-- 修改：60萬 font-size 改為 26px -->
                             <text x="350" y="30" text-anchor="middle" fill="#4f46e5" font-weight="bold" font-size="16">
-                                <tspan style="font-size: 18px;">60萬</tspan>(推算)
+                                <tspan style="font-size: 26px;">60萬</tspan>(推算)
                             </text>
                         </svg>
                     </div>
                     <div class="mt-6 text-center">
-                        <p class="text-gray-700 font-medium border-l-4 border-blue-500 pl-4 inline-block text-left bg-blue-50 p-4 rounded-r-lg" style="font-size: 21px;">
+                        <p class="text-gray-700 font-medium border-l-4 border-blue-500 pl-4 inline-block text-left bg-blue-50 p-4 rounded-r-lg">
                             這不是潮流，這是市場需求量，只要香港人還有老人家和小朋友，這門生意就不會消失。
                         </p>
                     </div>
                     
                     <!-- 文案區域 -->
                     <div class="mt-12 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 p-8 rounded-2xl text-center shadow-sm">
-                        <p class="text-gray-800 font-bold mb-4" style="font-size: 21px;">
+                        <p class="text-gray-800 font-bold mb-4">
                             你有無曾幾何時想過做生意？你想創業，但你唔識而放棄？
                         </p>
-                        <p class="text-gray-800" style="font-size: 21px;">
-                            現在全港 <span class="text-red-600 font-bold" style="font-size: 34px;">第一間</span> 專注教你創業，一個課程，令你少走5年冤枉路<br>
+                        <p class="text-gray-800">
+                            現在全港 <span class="text-red-600 font-bold" style="font-size: 34px;">第一間</span> 專注教你創業，一個課程，令你走少5年冤枉路<br>
                             相等於幫你慳 <span class="text-green-600 font-bold" style="font-size: 34px;">$150萬</span> (舖租 + 人工 x 5年)
                         </p>
+                    </div>
+
+                    <!-- $5萬開業揭秘 (搬運至此) -->
+                    <div class="mt-10 bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 p-4 md:p-6 rounded-xl shadow-sm inline-block mx-auto max-w-4xl w-full">
+                        <h3 class="text-gray-800 font-bold mb-8" style="font-size: 34px !important;">
+                            《⚠️ 揭秘：如何用 $5萬 開業成本，加入香港年產值 20億 的剛需市場？》
+                        </h3>
+
+                        <!-- 課程流程圖 (Step 1-5 搬回這裡) -->
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative mt-6">
+                            <div class="hidden md:block absolute top-8 left-0 w-full h-1 bg-gray-300 z-0" style="top: 25%;"></div>
+
+                            <!-- Step 1 -->
+                            <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
+                                <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">1</div>
+                                <h4 class="font-bold text-gray-900 mb-2">上堂</h4>
+                                <p class="text-gray-600" style="font-size: 18px !important;">購買課堂，掌握行業知識</p>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
+                                <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">2</div>
+                                <h4 class="font-bold text-gray-900 mb-2">選址</h4>
+                                <p class="text-gray-600" style="font-size: 18px !important;">教授租舖技巧 (地下舖 vs 商場舖 vs 樓上舖)</p>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
+                                <div class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">3</div>
+                                <h4 class="font-bold text-gray-900 mb-2">牌照</h4>
+                                <p class="text-gray-600" style="font-size: 18px !important;">協助申請牌照</p>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
+                                <div class="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">4</div>
+                                <h4 class="font-bold text-gray-900 mb-2">開張</h4>
+                                <p class="text-gray-600" style="font-size: 18px !important;">導師手把手沿途支援</p>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
+                                <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">5</div>
+                                <h4 class="font-bold text-gray-900 mb-2">營運賺錢</h4>
+                                <p class="text-gray-600" style="font-size: 18px !important;">教授搵客人、搵外傭、搵資源</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 日常工作流程 (新區域，放在 $5萬 之後) -->
+                    <div class="mt-10 p-6 rounded-xl border-2 border-dashed border-gray-300 w-full max-w-4xl mx-auto">
+                        <h3 class="text-gray-800 font-bold mb-8 text-center" style="font-size: 34px !important;">日常工作流程</h3>
+                        
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mt-6">
+                            <!-- Step 1 -->
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-orange-100 flex flex-col items-center w-full">
+                                <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mb-2">1</div>
+                                <span class="font-bold text-gray-800 text-center">面試外傭</span>
+                            </div>
+                            <div class="hidden md:block text-orange-300"><i class="fas fa-arrow-right"></i></div>
+                            <div class="md:hidden text-orange-300"><i class="fas fa-arrow-down"></i></div>
+
+                            <!-- Step 2 -->
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-orange-100 flex flex-col items-center w-full">
+                                <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mb-2">2</div>
+                                <span class="font-bold text-gray-800 text-center">回覆僱主</span>
+                            </div>
+                            <div class="hidden md:block text-orange-300"><i class="fas fa-arrow-right"></i></div>
+                            <div class="md:hidden text-orange-300"><i class="fas fa-arrow-down"></i></div>
+
+                            <!-- Step 3 -->
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-orange-100 flex flex-col items-center w-full">
+                                <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mb-2">3</div>
+                                <span class="font-bold text-gray-800 text-center">配對雙方</span>
+                            </div>
+                            <div class="hidden md:block text-orange-300"><i class="fas fa-arrow-right"></i></div>
+                            <div class="md:hidden text-orange-300"><i class="fas fa-arrow-down"></i></div>
+
+                            <!-- Step 4 -->
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-orange-100 flex flex-col items-center w-full">
+                                <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mb-2">4</div>
+                                <span class="font-bold text-gray-800 text-center">簽約收錢</span>
+                            </div>
+                            <div class="hidden md:block text-orange-300"><i class="fas fa-arrow-right"></i></div>
+                            <div class="md:hidden text-orange-300"><i class="fas fa-arrow-down"></i></div>
+
+                            <!-- Step 5 -->
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-orange-100 flex flex-col items-center w-full">
+                                <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mb-2">5</div>
+                                <span class="font-bold text-gray-800 text-center">代辦文件</span>
+                            </div>
+                            <div class="hidden md:block text-orange-300"><i class="fas fa-arrow-right"></i></div>
+                            <div class="md:hidden text-orange-300"><i class="fas fa-arrow-down"></i></div>
+
+                            <!-- Step 6 -->
+                            <div class="flex-1 bg-white p-3 rounded-lg shadow-sm border border-orange-100 flex flex-col items-center w-full">
+                                <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mb-2">6</div>
+                                <span class="font-bold text-gray-800 text-center">重複工作</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -334,24 +436,23 @@
     <section id="testimonials" class="py-16 md:py-24 bg-slate-100">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-blue-600 font-semibold tracking-wide mb-2 text-center nav-text">What Our Students Are Saying</h2>
                 <h2 class="text-gray-900 mb-4" style="font-size: 55px !important;">🗣️ 學生見證</h2>
-                <p class="text-gray-600" style="font-size: 21px;">聽聽我們的學生如何評價課程與導師的支援。</p>
+                <p class="text-gray-600">聽聽我們的學生如何評價課程與導師的支援。</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <!-- 見證 1 (P005) -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col">
-                    <div class="w-full h-80 overflow-hidden">
-                        <!-- 修改圖片路徑為相對路徑 -->
+                    <div class="w-full overflow-hidden" style="aspect-ratio: 1500 / 927;">
                         <img src="./P005.jpg" alt="學生見證 1" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-8 flex-1 flex flex-col justify-center">
                         <div class="text-blue-500 mb-4" style="font-size: 42px;"><i class="fas fa-quote-left"></i></div>
-                        <p class="text-gray-700 italic mb-4" style="font-size: 21px;">
+                        <p class="text-gray-700 italic mb-4">
                             「我已經係中年，由零學起，老師非常有耐心教我，因為我乜都唔識我乜都問，有老師教我無咁徬徨」
                         </p>
                         <div class="mt-auto">
-                            <!-- 修改：名字 Adam -->
                             <span class="block font-bold text-gray-900" style="font-size: 26px;">— Adam</span>
                         </div>
                     </div>
@@ -359,21 +460,53 @@
 
                 <!-- 見證 2 (P006) -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col">
-                    <div class="w-full h-80 overflow-hidden">
-                        <!-- 修改圖片路徑為相對路徑 -->
+                    <div class="w-full overflow-hidden" style="aspect-ratio: 1500 / 927;">
                         <img src="./P006.JPG" alt="學生見證 2" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-8 flex-1 flex flex-col justify-center">
                         <div class="text-green-500 mb-4" style="font-size: 42px;"><i class="fas fa-quote-left"></i></div>
-                        <p class="text-gray-700 italic mb-4" style="font-size: 21px;">
+                        <p class="text-gray-700 italic mb-4">
                             「我連租office都會問阿sir，阿sir講解好好，每個問題都錄音4-5分鐘去解釋，詳細到我唔想聽，哈哈」
                         </p>
                         <div class="mt-auto">
-                            <!-- 修改：名字 MIMI -->
                             <span class="block font-bold text-gray-900" style="font-size: 26px;">— MIMI</span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客人見證 (Client Testimonials) - 新增區塊 -->
+    <section id="client-testimonials" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-gray-900 mb-4" style="font-size: 55px !important;">🤝 客人見證</h2>
+                <p class="text-gray-600">真實客戶好評，服務質素有保證。</p>
+            </div>
+            <!-- Grid for 6 images -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-slate-50 rounded-xl overflow-hidden shadow-md"><img src="./P001.jpg" alt="客人見證" class="w-full h-auto"></div>
+                <div class="bg-slate-50 rounded-xl overflow-hidden shadow-md"><img src="./P002.jpg" alt="客人見證" class="w-full h-auto"></div>
+                <div class="bg-slate-50 rounded-xl overflow-hidden shadow-md"><img src="./P003.jpg" alt="客人見證" class="w-full h-auto"></div>
+                <div class="bg-slate-50 rounded-xl overflow-hidden shadow-md"><img src="./P004.jpg" alt="客人見證" class="w-full h-auto"></div>
+                <div class="bg-slate-50 rounded-xl overflow-hidden shadow-md"><img src="./P007.jpg" alt="客人見證" class="w-full h-auto"></div>
+                <div class="bg-slate-50 rounded-xl overflow-hidden shadow-md"><img src="./P008.jpg" alt="客人見證" class="w-full h-auto"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 外傭見證 (Helper Testimonials) - 新增區塊 -->
+    <section id="helper-testimonials" class="py-16 md:py-24 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-gray-900 mb-4" style="font-size: 55px !important;">🌍 外傭見證</h2>
+                <p class="text-gray-600">我們不僅服務僱主，也深受外傭信賴。</p>
+            </div>
+            <!-- Grid for 2 images -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg"><img src="./P009.jpg" alt="外傭見證" class="w-full h-auto"></div>
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg"><img src="./P010.jpg" alt="外傭見證" class="w-full h-auto"></div>
             </div>
         </div>
     </section>
@@ -384,7 +517,7 @@
             <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
                 <h2 class="text-blue-600 font-semibold tracking-wide mb-2" style="font-size: 26px !important;">What We Teach</h2>
                 <h2 class="text-gray-900 mb-4" style="font-size: 55px !important;">🎓 我們的專業課程</h2>
-                <p class="text-gray-600" style="font-size: 21px;">無論你想創業做老闆，還是做一個精明的僱主，我們都有適合你的方案。</p>
+                <p class="text-gray-600">無論你想創業做老闆，還是做一個精明的僱主，我們都有適合你的方案。</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
@@ -397,8 +530,8 @@
                         <i class="fas fa-rocket" style="font-size: 34px;"></i>
                     </div>
                     <h3 class="text-gray-900 mb-4" style="font-size: 34px !important;">💪 教你創業</h3>
-                    <p class="text-gray-500 mb-6" style="font-size: 21px;">前僱傭公司老闆成為你導師，走少5年冤枉路。你適唔適合創業？你睇睇免費分享會再決定</p>
-                    <ul class="space-y-3 text-gray-600 z-10 relative" style="font-size: 21px;">
+                    <p class="text-gray-500 mb-6">前僱傭公司老闆成為你導師，走少5年冤枉路。你適唔適合創業？你睇睇免費分享會再決定</p>
+                    <ul class="space-y-3 text-gray-600 z-10 relative">
                         <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mr-2 mt-1 flex-shrink-0"></i> <span>分析創業各行業比較 🔍</span></li>
                         <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mr-2 mt-1 flex-shrink-0"></i> <span>分析僱傭業好處缺點 💡</span></li>
                         <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mr-2 mt-1 flex-shrink-0"></i> <span>教授：開業、行政、營運、發展、財政👩‍🏫</span></li>
@@ -417,8 +550,8 @@
                         <i class="fas fa-user-check" style="font-size: 34px;"></i>
                     </div>
                     <h3 class="text-gray-900 mb-4" style="font-size: 34px !important;">🧮 唔創業都得，教你做僱主</h3>
-                    <p class="text-gray-500 mb-6" style="font-size: 21px;">前僱傭公司老闆教你行業秘密，助你做個精明僱主，避免不必要的損失與麻煩</p>
-                    <ul class="space-y-3 text-gray-600 z-10 relative" style="font-size: 21px;">
+                    <p class="text-gray-500 mb-6">前僱傭公司老闆教你行業秘密，助你做個精明僱主，避免不必要的損失與麻煩</p>
+                    <ul class="space-y-3 text-gray-600 z-10 relative">
                         <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i> <span>教你揀選好外傭 🧕🏻</span></li>
                         <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i> <span>教你填寫申請表格✍🏻</span></li>
                         <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i> <span>避免外傭財務借錢 💸</span></li>
@@ -434,56 +567,9 @@
     <!-- 分享會資訊 (Seminar Section) -->
     <section id="seminar" class="py-16 md:py-24 bg-white overflow-hidden">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            
-            <!-- $5萬開業揭秘 -->
-            <div class="mb-10 bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 p-4 md:p-6 rounded-xl shadow-sm inline-block mx-auto max-w-4xl w-full">
-                <h3 class="text-gray-800 font-bold mb-8" style="font-size: 34px !important;">
-                    《⚠️ 揭秘：如何用 $5萬 開業成本，加入香港年產值 20億 的剛需市場？》
-                </h3>
-
-                <!-- 創業流程圖 (Flowchart) -->
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
-                    <!-- 連接線 (Desktop only) -->
-                    <div class="hidden md:block absolute top-8 left-0 w-full h-1 bg-gray-300 z-0" style="top: 25%;"></div>
-
-                    <!-- Step 1 -->
-                    <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
-                        <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">1</div>
-                        <h4 class="font-bold text-gray-900 mb-2" style="font-size: 26px !important;">上堂</h4>
-                        <p class="text-gray-600" style="font-size: 18px;">購買課堂，掌握行業知識</p>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
-                        <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">2</div>
-                        <h4 class="font-bold text-gray-900 mb-2" style="font-size: 26px !important;">選址</h4>
-                        <p class="text-gray-600" style="font-size: 18px;">教授租舖技巧 (地下舖 vs 商場舖 vs 樓上舖)</p>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
-                        <div class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">3</div>
-                        <h4 class="font-bold text-gray-900 mb-2" style="font-size: 26px !important;">牌照</h4>
-                        <p class="text-gray-600" style="font-size: 18px;">協助申請牌照</p>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
-                        <div class="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">4</div>
-                        <h4 class="font-bold text-gray-900 mb-2" style="font-size: 26px !important;">開張</h4>
-                        <p class="text-gray-600" style="font-size: 18px;">導師手把手沿途支援</p>
-                    </div>
-
-                    <!-- Step 5 -->
-                    <div class="relative z-10 bg-white p-4 rounded-lg shadow-md border border-gray-100 flex flex-col items-center">
-                        <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-3 shadow-lg">5</div>
-                        <h4 class="font-bold text-gray-900 mb-2" style="font-size: 26px !important;">營運賺錢</h4>
-                        <p class="text-gray-600" style="font-size: 18px;">教授搵客人、搵外傭、搵資源</p>
-                    </div>
-                </div>
+            <div class="inline-block p-4 rounded-full bg-red-100 mb-6">
+                <i class="fas fa-fire text-red-500 text-2xl animate-pulse"></i>
             </div>
-
-            <!-- 修改：移除紅火 icon (B001 問題) -->
             <h2 class="text-gray-900 mb-4" style="font-size: 55px !important;">🎟️ 收生有限，額滿即止</h2>
             
             <!-- 倒數計時器 -->
@@ -498,7 +584,7 @@
                 </div>
             </div>
 
-            <p class="text-gray-600 mb-12" style="font-size: 21px;">
+            <p class="text-gray-600 mb-12">
                 機會不等人，立即報名我們的免費線上ZOOM分享會，了解更多行業內幕。
             </p>
             
@@ -510,17 +596,17 @@
                     
                     <!-- 重點內容 (Tags 風格) -->
                     <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-10">
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">你自己會賺幾多錢？$xx萬每月</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">市場總額$xx億</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">驚快的回本期</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">開業成本：出乎意料的低</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">僱傭公司開設流程</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">如何選擇好外傭</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">教你10年生意版圖</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">其他生意 VS 僱傭公司的優點缺點</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">創業僱傭公司的好處</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">成本結構</span>
-                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200" style="font-size: 21px;">外傭人口60萬</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">你自己會賺幾多錢？$xx萬每月</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">市場總額$xx億</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">驚快的回本期</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">開業成本：出乎意料的低</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">僱傭公司開設流程</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">如何選擇好外傭</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">教你10年生意版圖</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">其他生意 VS 僱傭公司的優點缺點</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">創業僱傭公司的好處</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">成本結構</span>
+                        <span class="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-gray-200">外傭人口60萬</span>
                     </div>
 
                     <a href="https://wa.me/85294422414" target="_blank" class="inline-flex items-center justify-center w-full md:w-auto px-6 md:px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 btn-text">
@@ -544,182 +630,182 @@
             <div class="space-y-4">
                 <!-- Question 1 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>分享會的收費？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         $0，分享會是免費。你適唔適合創業，你可以參加免費線上分享會再決定
                     </div>
                 </details>
 
                 <!-- Question 2 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>分享會的地點？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         線上ZOOM，隨時隨地參加
                     </div>
                 </details>
 
                 <!-- Question 3 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>分享會的語言？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         全程廣東話
                     </div>
                 </details>
 
                 <!-- Question 4 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>分享會聽幾耐？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         45分鐘 至 60分鐘
                     </div>
                 </details>
 
                 <!-- Question 5 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>分享會要報名？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         請 WhatsApp 與我們留座，每晚 8:00 分享會，為保持教學質素會以「一對一」進行，收生有限，額滿即止
                     </div>
                 </details>
 
                 <!-- Question: 導師資歷 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>導師資歷？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         導師創辦自己僱傭公司 2017-2025，8年經驗和專業知識十分豐富
                     </div>
                 </details>
 
                 <!-- Question: 零經驗 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>我唔識開公司、唔識申請牌照，甚至邊到買傢俬儀器工具都一頭霧水？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         放心，本課程專為「零創業、零僱傭」人士而設立，所有屬於公司和僱傭問題都會一一教授你
                     </div>
                 </details>
 
                 <!-- Question 6 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>創業需要行業經驗？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         零經驗，導師也是新手創業，導師創業前也沒有在任何僱傭公司打工
                     </div>
                 </details>
 
                 <!-- Question 7 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>需唔需要請員工或購買特別生財工具？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         零員工，零工具，1人1舖1檯1電腦1手機1打印機，就可以營運日常公司
                     </div>
                 </details>
 
                 <!-- Question 8 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>創業開業成本？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         非常低開業成本，低至$5萬
                     </div>
                 </details>
 
                 <!-- Question 9 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>創業後營運僱傭公司複雜嗎？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         萬事起頭難，所以導師會教導你一切須知和協助你創業，當你學習和上手後，你會發現營運公司簡單過你打工
                     </div>
                 </details>
 
-                <!-- Question 10 (修改) -->
+                <!-- Question 10 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>創業後，導師仍然會提供幫助或售後服務？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         一定會，導師不單止會提供課程內容，還會協助你申請牌照、開張、營運、經驗傳承等一切的後期支援，6個月的沿路解決
                     </div>
                 </details>
 
                 <!-- Question 11 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>課程是睇影片？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         不會睇影片，課程是「一對一」教學，線上直播教學，因為你即時有疑問，導師即時為你解答
                     </div>
                 </details>
 
                 <!-- Question 12 -->
                 <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-gray-800" style="font-size: 21px;">
+                    <summary class="flex justify-between items-center font-bold text-gray-800">
                         <span>聯絡我們？</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fas fa-chevron-down text-blue-500"></i>
                         </span>
                     </summary>
-                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500" style="font-size: 21px;">
+                    <div class="text-gray-600 mt-3 pl-2 border-l-2 border-blue-500">
                         請 WhatsApp 9442 2414 與我們聯絡
                     </div>
                 </details>
@@ -732,14 +818,28 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-blue-600 font-semibold tracking-wide mb-2" style="font-size: 26px !important;">Contact Us</h2>
             <h2 class="text-gray-900 mb-8" style="font-size: 55px !important;">聯絡我們</h2>
-            <div class="flex justify-center">
-                <a href="https://wa.me/85294422414" target="_blank" class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col items-center group border border-gray-100 w-full max-w-sm">
+            
+            <!-- 聯絡方式容器 -->
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <!-- WhatsApp -->
+                <a href="https://wa.me/85294422414" target="_blank" class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col items-center group border border-gray-100 w-full md:max-w-sm">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300">
                         <i class="fab fa-whatsapp text-green-500" style="font-size: 42px;"></i>
                     </div>
                     <h4 class="text-gray-800 mb-2 font-bold" style="font-size: 26px;">WhatsApp</h4>
                     <p class="text-green-600 font-bold" style="font-size: 34px;">9442 2414</p>
-                    <span class="text-gray-400 mt-2" style="font-size: 21px;">點擊立即聯絡</span>
+                    <span class="text-gray-400 mt-2">點擊立即聯絡</span>
+                </a>
+
+                <!-- Facebook (修改) -->
+                <a href="https://m.me/HKESA.org" target="_blank" class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col items-center group border border-gray-100 w-full md:max-w-sm">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition duration-300">
+                        <!-- 修改 icon 為 fa-facebook -->
+                        <i class="fab fa-facebook text-blue-500" style="font-size: 42px;"></i>
+                    </div>
+                    <h4 class="text-gray-800 mb-2 font-bold" style="font-size: 26px;">Facebook</h4>
+                    <!-- 移除 Messenger 文字，保留 Facebook 作為主要標識 -->
+                    <span class="text-gray-400 mt-2">點擊立即聯絡</span>
                 </a>
             </div>
         </div>
@@ -752,12 +852,13 @@
                 <div class="flex items-center justify-center gap-2 text-white font-bold mb-4" style="font-size: 26px;">
                     香港僱傭服務協會
                 </div>
-                <p class="text-gray-400 leading-relaxed mb-8" style="font-size: 21px;">
+                <p class="text-gray-400 leading-relaxed mb-8">
                     教你創業，教你做精明僱主。
                 </p>
-                <p class="text-gray-500" style="font-size: 21px;">
+                <p class="text-gray-500">
                     &copy; 2025 香港僱傭服務協會. All rights reserved. 
-                    <span style="color: #0f172a;">V1.8</span> <!-- 隱藏版本號 -->
+                    <!-- 更新版本號至 V1.10 -->
+                    <span style="color: #0f172a;">V1.10</span>
                 </p>
             </div>
         </div>
@@ -773,16 +874,20 @@
             }
         }
 
+        // 導航欄縮小效果
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
                 navbar.classList.add('shadow-md', 'bg-white/95');
+                if (window.innerWidth <= 768) {
+                    navbar.classList.add('shrink');
+                }
             } else {
-                navbar.classList.remove('shadow-md', 'bg-white/95');
+                navbar.classList.remove('shadow-md', 'bg-white/95', 'shrink');
             }
         });
 
-        // 倒數計時器邏輯：香港時區 UTC+8，每晚 20:00 (8 PM)，20:01 重置
+        // 倒數計時器邏輯
         function updateCountdown() {
             const now = new Date();
             const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
